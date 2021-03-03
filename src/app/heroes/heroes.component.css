@@ -1,0 +1,8 @@
+div {
+    margin-left: 3%;
+}
+
+div > span, label {
+    font-size: large;
+    font-weight: 900;
+}
