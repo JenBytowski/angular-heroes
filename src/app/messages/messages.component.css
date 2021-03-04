@@ -1,0 +1,10 @@
+.messages-log {
+    position: fixed;
+    border: solid 1px;
+    right: 1%;
+    top: 1%;
+}
+
+.messages-log > * {
+    margin: 5px;
+}
