@@ -6,17 +6,3 @@ div > span, label {
     font-size: large;
     font-weight: 900;
 }
-
-.hero-info {
-    margin: 1%;
-}
-
-.hero-additional-info {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 5px;
-}
-
-.hero-additional-info > label {
-    width: 4%;
-}

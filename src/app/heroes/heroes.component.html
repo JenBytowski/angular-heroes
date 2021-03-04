@@ -3,13 +3,4 @@
         <span>id:</span> {{this.hero.id}}
     </div>
 </div>
-<div *ngIf="selectedHero">
-    <div class="hero-additional-info">
-    <label for="name">name: </label>
-    <input id="name" type="text" [(ngModel)]="this.selectedHero.name">
-    </div>
-    <div class="hero-additional-info">
-        <label for="age">age: </label>
-        <input if="age" type="text" [(ngModel)]="this.selectedHero.age">
-    </div>
-    </div>
+<hero-details [hero]="selectedHero"></hero-details>

@@ -1,0 +1,22 @@
+.hero-info {
+    margin: 1%;
+}
+
+.hero-additional-info {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+}
+
+.hero-additional-info > label {
+    width: 60px;;
+}
+
+div > .hero-additional-info {
+    margin-left: 8%;
+}
+
+div > label {
+    font-size: large;
+    font-weight: 900;
+}
