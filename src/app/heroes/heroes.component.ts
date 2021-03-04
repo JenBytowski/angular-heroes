@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeroService } from '../services/hero-service/hero.service';
 
 @Component({
   selector: 'heroes',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroesComponent implements OnInit {
 
-  heroes: Hero[] = HEROES;
+  heroes: Hero[];
   selectedHero?: Hero;
 
-  constructor() { }
+  constructor(private heroService: HeroService) { 
+    this.heroes = [];
+  }
 
   onSelect(hero: Hero) : void
   {
@@ -18,6 +21,7 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 
 }
@@ -27,10 +31,3 @@ export interface Hero {
   name: string;
   age?: number;
 }
-
-export const HEROES: Hero[] = [
-{id: 1, name: 'Windstorm', age:10},
-{id: 2, name: 'Mr Someone', age:100},
-{id: 3, name: 'Tornado'},
-{id: 4, name: 'Lizzard king', age:27},
-];
