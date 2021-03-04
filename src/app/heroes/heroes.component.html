@@ -1,12 +1,15 @@
-<div>
+<div class="hero-info" *ngFor="let hero of this.heroes" (click)="onSelect(hero)">
     <div>
         <span>id:</span> {{this.hero.id}}
     </div>
-    <div>
-    <label for="name">name: </label>
-    <input id="name" [(ngModel)]="hero.name">
-    </div>
-    <div>
-    <span>age:</span> {{this.hero.age}}
-    </div>
 </div>
+<div *ngIf="selectedHero">
+    <div class="hero-additional-info">
+    <label for="name">name: </label>
+    <input id="name" type="text" [(ngModel)]="this.selectedHero.name">
+    </div>
+    <div class="hero-additional-info">
+        <label for="age">age: </label>
+        <input if="age" type="text" [(ngModel)]="this.selectedHero.age">
+    </div>
+    </div>
