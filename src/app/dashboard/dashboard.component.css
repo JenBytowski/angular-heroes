@@ -1,8 +1,6 @@
-div {
-    margin-left: 3%;
-}
-
-a {
+div > a {
+    display: block;
+    margin-top: 1%;
     text-decoration: none;
     font-size: large;
 }

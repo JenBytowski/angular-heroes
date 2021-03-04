@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Hero } from '../../heroes/heroes.component';
@@ -13,6 +14,16 @@ export class HeroService {
     this.messageService.addMessage(`hero servise successfully get heroes`);
 
     return heroes ?? [];
+  }
+
+  //TODO разобраться почему underfind
+  /*  getHero(id: number): Observable<Hero | undefined> {
+     this.messageService.addMessage(`invoking getHero method with hero id ${id}`);
+     return of(HEROES.find(hero => hero.id === id));
+   } */
+
+  getHeroByIdSync(id: number): Hero | undefined {
+    return HEROES.find(hero => hero.id === id);
   }
 
   constructor(private messageService: MessageService) {

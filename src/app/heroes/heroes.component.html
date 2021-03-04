@@ -1,6 +1,3 @@
-<div class="hero-info" *ngFor="let hero of this.heroes" (click)="onSelect(hero)">
-    <div>
-        <span>id:</span> {{this.hero.id}}
-    </div>
+<div class="hero-info" *ngFor="let hero of this.heroes">
+    <a routerLink="/details/{{hero.id}}">{{hero.id}} {{hero.name}}</a>
 </div>
-<hero-details [hero]="selectedHero"></hero-details>

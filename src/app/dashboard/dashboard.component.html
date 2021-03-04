@@ -1,0 +1,4 @@
+<h2>Heroes info</h2>
+<div>
+    <a *ngFor="let hero of this.heroes" routerLink="/details/{{hero.id}}">{{hero.name}}</a>
+</div>

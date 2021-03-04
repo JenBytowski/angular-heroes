@@ -1,5 +1,6 @@
 .messages-log {
     position: fixed;
+    background-color: snow;
     border: solid 1px;
     right: 1%;
     top: 1%;
