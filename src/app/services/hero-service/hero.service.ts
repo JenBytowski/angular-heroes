@@ -3,37 +3,49 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Hero } from '../../heroes/heroes.component';
 import { MessageService } from '../message-service/message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
 
+  private readonly dbUrl: string;
+
   public getHeroes(): Observable<Hero[]> {
-    let heroes = of(HEROES);
-    this.messageService.addMessage(`hero servise successfully get heroes`);
+    let heroes = this.httpClient.get<Hero[]>(this.dbUrl).pipe(catchError((err, params) => {
+      this.messageService.addMessage(`error: in HeroService.getHeroes method ${err}`);
 
-    return heroes ?? [];
+      return of([]);
+    })).pipe(tap(inf => { this.messageService.addMessage('get heroes from server') }));
+    this.messageService.addMessage(`hero servise get heroes from api`);
+
+    return heroes;
   }
 
-  //TODO разобраться почему underfind
-  /*  getHero(id: number): Observable<Hero | undefined> {
-     this.messageService.addMessage(`invoking getHero method with hero id ${id}`);
-     return of(HEROES.find(hero => hero.id === id));
-   } */
-
-  getHeroByIdSync(id: number): Hero | undefined {
-    return HEROES.find(hero => hero.id === id);
+  getHeroById(id: number): Observable<Hero | undefined> {
+    return this.httpClient.get<Hero>(`${this.dbUrl}/${id}`).pipe(
+      catchError((err, params) => {
+      this.messageService.addMessage(`error: in HeroService.getHeroById method ${err}`);
+      return of(undefined);})).pipe( 
+      tap(inf => { 
+        this.messageService.addMessage(`invoking HeroService.getHeroesById method with hero id ${id}`); 
+      }));
   }
 
-  constructor(private messageService: MessageService) {
+  updateHero(hero: Hero): Observable<any>
+  {
+    return this.httpClient.put(this.dbUrl, hero, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).pipe(
+      catchError((err, params) => {
+      this.messageService.addMessage(`error: in HeroService.updateHero method ${err}`);
+      return of(undefined);})).pipe( 
+      tap(inf => { 
+        this.messageService.addMessage(`invoking HeroService.updateHero method with hero id ${hero.id}`); 
+      }));
+  }
 
+  constructor(private messageService: MessageService, private httpClient: HttpClient) {
+    this.dbUrl = 'api/heroes';
   }
 }
-
-export const HEROES: Hero[] = [
-  { id: 1, name: 'Windstorm', age: 10 },
-  { id: 2, name: 'Mr Someone', age: 100 },
-  { id: 3, name: 'Tornado' },
-  { id: 4, name: 'Lizzard king', age: 27 },
-];

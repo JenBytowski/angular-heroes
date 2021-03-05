@@ -16,12 +16,18 @@ export class HeroDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private location: Location,
     private heroService: HeroService) {
-
   }
 
   ngOnInit(): void {
     let heroId = Number(this.route.snapshot.paramMap.get('id'));
-    //this.heroService.getHero(heroId).subscribe(hero => this.hero == hero);
-    this.hero = this.heroService.getHeroByIdSync(heroId);
+    this.heroService.getHeroById(heroId).subscribe(hero => this.hero = hero);
+  }
+
+  saveChanges(hero: Hero): void {
+    this.heroService.updateHero(hero).subscribe(inf => { this.location.back(); })
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

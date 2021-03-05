@@ -7,4 +7,10 @@
         <label for="age">age: </label>
         <input if="age" type="text" [(ngModel)]="this.hero.age">
     </div>
+    <div class="hero-additional-info">
+        <input type="button" (click)="saveChanges(this.hero)" value="update info" />
+    </div>
+    <div class="hero-additional-info">
+        <input type="button" (click)="goBack()" value="go back" />
+    </div>
 </div>
